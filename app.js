@@ -11,6 +11,7 @@ const authenticatedUser = require('./middleware/authentication');
 
 const authRouter = require('./routes/auth');
 const jobsRouter = require('./routes/jobs');
+const petsRouter = require('./routes/pets');
 
 // error handler
 const notFoundMiddleware = require('./middleware/not-found');
@@ -23,6 +24,7 @@ app.use(express.json());
 
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/jobs', authenticatedUser, jobsRouter);
+app.use('/api/v1/pets', authenticatedUser, petsRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
