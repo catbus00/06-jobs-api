@@ -57,6 +57,9 @@ app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/jobs', authenticatedUser, jobsRouter);
 app.use('/api/v1/pets', authenticatedUser, petsRouter);
 
+app.use(notFoundMiddleware);
+app.use(errorHandlerMiddleware);
+
 const port = process.env.PORT || 3000;
 
 const start = async () => {
