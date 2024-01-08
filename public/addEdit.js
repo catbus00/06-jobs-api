@@ -63,11 +63,10 @@ export const handleAddEdit = () => {
         }
 
         enableInput(true);
+      } else if (e.target === editCancel) {
+        message.textContent = '';
+        showJobs();
       }
-      //   else if (e.target === editCancel) {
-      //     message.textContent = '';
-      //     showJobs();
-      //   }
     }
   });
 };
