@@ -27,6 +27,7 @@ export const handleAddEdit = () => {
           method = 'PATCH';
           url = `/api/v1/jobs/${addEditDiv.dataset.id}`;
         }
+
         try {
           const response = await fetch(url, {
             method: method,
@@ -71,6 +72,32 @@ export const handleAddEdit = () => {
   });
 };
 
+export const deleteJobs = async (jobId) => {
+  try {
+    enableInput(false);
+    const response = await fetch(`/api/v1/jobs/${jobId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    await response.json();
+    if (response.status === 200) {
+      message.textContent = 'The job was deleted.';
+    } else {
+      // might happen if the list has been updated since last display
+      message.textContent = 'The jobs entry was not found';
+    }
+  } catch (err) {
+    console.log(err);
+    message.textContent = 'A communications error has occurred.';
+  } finally {
+    enableInput(true);
+    showJobs();
+  }
+};
+
 export const showAddEdit = async (jobId) => {
   if (!jobId) {
     company.value = '';
@@ -92,8 +119,8 @@ export const showAddEdit = async (jobId) => {
         },
       });
 
-      const data = await response.json();
       if (response.status === 200) {
+        const data = await response.json();
         company.value = data.job.company;
         position.value = data.job.position;
         status.value = data.job.status;
