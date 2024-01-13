@@ -8,8 +8,8 @@ const PetSchema = new mongoose.Schema(
     },
     gender: {
       type: String,
-      enum: ['male', 'female', 'unknown'],
-      default: 'unknown',
+      required: [true, 'Please provide the gender of your pet'],
+      maxlength: 50,
     },
     color: {
       type: String,
@@ -17,9 +17,9 @@ const PetSchema = new mongoose.Schema(
       maxlength: 100,
     },
     age: {
-      type: Number,
+      type: String,
       required: [true, 'Please provide the age of your pet'],
-      max: 99,
+      max: 50,
     },
     createdBy: {
       type: mongoose.Types.ObjectId,
