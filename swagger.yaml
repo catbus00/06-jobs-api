@@ -1,0 +1,383 @@
+openapi: 3.0.0
+info:
+  title: Jobs-API
+  contact: {}
+  version: '1.0'
+servers:
+  - url: https://jobs-api-jillian.onrender.com/api/v1
+    variables: {}
+paths:
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Login User
+      operationId: LoginUser
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/LoginUserRequest'
+            example:
+              email: jillian2@jillian.com
+              password: secret
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: Register User
+      operationId: RegisterUser
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/RegisterUserRequest'
+            example:
+              name: jillian
+              email: jillian@jillian.com
+              password: secret
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /jobs:
+    post:
+      tags:
+        - jobs
+      summary: Create Job
+      operationId: CreateJob
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/CreateJobRequest'
+            example:
+              company: test
+              position: todelete
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    get:
+      tags:
+        - jobs
+      summary: Get All Jobs
+      operationId: GetAllJobs
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /jobs/{id}:
+    get:
+      tags:
+        - jobs
+      summary: Get Single Job
+      operationId: GetSingleJob
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: The job ID
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    patch:
+      tags:
+        - jobs
+      summary: Update Job
+      operationId: UpdateJob
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: The job ID
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/UpdateJobRequest'
+            example:
+              company: spotify
+              position: full stack developer
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    delete:
+      tags:
+        - jobs
+      summary: Delete Job
+      operationId: DeleteJob
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: The job ID
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /pets:
+    post:
+      tags:
+        - pets
+      summary: Add Pet
+      operationId: AddPet
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/AddPetRequest'
+            example:
+              name: koko
+              gender: male
+              color: grey
+              age: 3
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    get:
+      tags:
+        - pets
+      summary: Get All Pets
+      operationId: GetAllPets
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /pets/{id}:
+    get:
+      tags:
+        - pets
+      summary: Get Single Pet
+      operationId: GetSinglePet
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: The pet ID
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    patch:
+      tags:
+        - pets
+      summary: Update Pets
+      operationId: UpdatePets
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: The pet ID
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/UpdatePetsRequest'
+            example:
+              name: koko
+              gender: male
+              color: grey and white with attitude
+              age: 3
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    delete:
+      tags:
+        - pets
+      summary: Delete Pet
+      operationId: DeletePet
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: The pet ID
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+components:
+  schemas:
+    LoginUserRequest:
+      title: LoginUserRequest
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: jillian2@jillian.com
+        password: secret
+    RegisterUserRequest:
+      title: RegisterUserRequest
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: jillian
+        email: jillian5@jillian.com
+        password: secret
+    CreateJobRequest:
+      title: CreateJobRequest
+      required:
+        - company
+        - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: test
+        position: todelete
+    AddPetRequest:
+      title: AddPetRequest
+      required:
+        - name
+        - gender
+        - color
+        - age
+      type: object
+      properties:
+        name:
+          type: string
+        gender:
+          type: string
+        color:
+          type: string
+        age:
+          type: integer
+          format: int32
+      example:
+        name: koko
+        gender: male
+        color: grey
+        age: 3
+    UpdateJobRequest:
+      title: UpdateJobRequest
+      required:
+        - company
+        - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: spotify
+        position: full stack developer
+    UpdatePetsRequest:
+      title: UpdatePetsRequest
+      required:
+        - name
+        - gender
+        - color
+        - age
+      type: object
+      properties:
+        name:
+          type: string
+        gender:
+          type: string
+        color:
+          type: string
+        age:
+          type: integer
+          format: int32
+      example:
+        name: koko
+        gender: male
+        color: grey and white with attitude
+        age: 3
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security:
+  - bearer: []
+tags:
+  - name: Auth
+    description: ''
+  - name: jobs
+    description: ''
+  - name: pets
+    description: ''
