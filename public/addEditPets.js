@@ -138,7 +138,8 @@ export const showAddEditPets = async (petId) => {
         message.textContent = '';
         addEditDivPets.dataset.id = petId;
 
-        setDivPet(addEditDivPets);
+        setDiv(addEditDivPets);
+        hideLogoff();
       } else {
         // might happen if the list has been updated since last display
         message.textContent = 'The entry for your pet was not found';

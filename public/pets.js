@@ -1,5 +1,5 @@
 import { inputEnabled, message, token, enableInput } from './index.js';
-import { showAddEditPets } from './addEditPets.js';
+import { deletePets, showAddEditPets } from './addEditPets.js';
 
 let petsDiv = null;
 let petsTable = null;
@@ -13,13 +13,15 @@ export const handlePets = () => {
 
   petsDiv.addEventListener('click', (e) => {
     if (inputEnabled && e.target.nodeName === 'BUTTON') {
-      showAddEditPets(null);
-    } else if (e.target.classList.contains('editButton')) {
-      message.textContent = '';
-      showAddEdit(e.target.dataset.id);
-    } else if (e.target.classList.contains('deleteButton')) {
-      message.textContent = '';
-      deleteJobs(e.target.dataset.id);
+      if (e.target === addPet) {
+        showAddEditPets(null);
+      } else if (e.target.classList.contains('editButton')) {
+        message.textContent = '';
+        showAddEditPets(e.target.dataset.id);
+      } else if (e.target.classList.contains('deleteButton')) {
+        message.textContent = '';
+        deletePets(e.target.dataset.id);
+      }
     }
   });
 };
