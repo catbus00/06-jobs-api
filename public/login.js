@@ -1,13 +1,13 @@
 import {
   inputEnabled,
   setDiv,
-  token,
   message,
   enableInput,
   setToken,
 } from './index.js';
 import { showLoginRegister } from './loginRegister.js';
-import { showJobs } from './jobs.js';
+import { showListing } from './listing.js';
+import { hideLogoff } from './logoff.js';
 
 let loginDiv = null;
 let email = null;
@@ -45,7 +45,7 @@ export const handleLogin = () => {
             email.value = '';
             password.value = '';
 
-            showJobs();
+            showListing();
           } else {
             message.textContent = data.msg;
           }
@@ -68,4 +68,5 @@ export const showLogin = () => {
   email.value = null;
   password.value = null;
   setDiv(loginDiv);
+  hideLogoff();
 };

@@ -2,12 +2,12 @@ import {
   inputEnabled,
   setDiv,
   message,
-  token,
   enableInput,
   setToken,
 } from './index.js';
 import { showLoginRegister } from './loginRegister.js';
-import { showJobs } from './jobs.js';
+import { showListing } from './listing.js';
+import { hideLogoff } from './logoff.js';
 
 let registerDiv = null;
 let name = null;
@@ -55,7 +55,7 @@ export const handleRegister = () => {
               password1.value = '';
               password2.value = '';
 
-              showJobs();
+              showListing();
             } else {
               message.textContent = data.msg;
             }
@@ -82,4 +82,5 @@ export const showRegister = () => {
   password1.value = null;
   password2.value = null;
   setDiv(registerDiv);
+  hideLogoff();
 };

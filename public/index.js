@@ -8,16 +8,6 @@ export const setDiv = (newDiv) => {
     activeDiv = newDiv;
   }
 };
-let activeDivPet = null;
-export const setDivPet = (newDiv) => {
-  if (newDiv != activeDivPet) {
-    if (activeDivPet) {
-      activeDivPet.style.display = 'none';
-    }
-    newDiv.style.display = 'block';
-    activeDivPet = newDiv;
-  }
-};
 
 export let inputEnabled = true;
 export const enableInput = (state) => {
@@ -36,27 +26,30 @@ export const setToken = (value) => {
 
 export let message = null;
 
-import { showJobs, handleJobs } from './jobs.js';
+import { handleJobs } from './jobs.js';
 import { showLoginRegister, handleLoginRegister } from './loginRegister.js';
 import { handleLogin } from './login.js';
 import { handleAddEdit } from './addEdit.js';
 import { handleRegister } from './register.js';
-import { showPets, handlePets } from './pets.js';
+import { handlePets } from './pets.js';
 import { handleAddEditPets } from './addEditPets.js';
+import { showListing, handleListing } from './listing.js';
+import { handleLogoff } from './logoff.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   token = localStorage.getItem('token');
   message = document.getElementById('message');
   handleLoginRegister();
   handleLogin();
+  handleLogoff();
+  handleListing();
   handleJobs();
   handlePets();
   handleRegister();
   handleAddEdit();
   handleAddEditPets();
   if (token) {
-    showJobs();
-    showPets();
+    showListing();
   } else {
     showLoginRegister();
   }

@@ -1,13 +1,5 @@
-import {
-  inputEnabled,
-  setDivPet,
-  message,
-  setToken,
-  token,
-  enableInput,
-} from './index.js';
-import { showLoginRegister } from './loginRegister.js';
-import { showAddEditPets, deletePets } from './addEditPets.js';
+import { inputEnabled, message, token, enableInput } from './index.js';
+import { showAddEditPets } from './addEditPets.js';
 
 let petsDiv = null;
 let petsTable = null;
@@ -15,30 +7,19 @@ let petsTableHeader = null;
 
 export const handlePets = () => {
   petsDiv = document.getElementById('pets');
-  const logoff = document.getElementById('logoff-register');
   const addPet = document.getElementById('add-pet');
   petsTable = document.getElementById('pets-table');
   petsTableHeader = document.getElementById('pets-table-header');
 
   petsDiv.addEventListener('click', (e) => {
     if (inputEnabled && e.target.nodeName === 'BUTTON') {
-      if (e.target === addPet) {
-        showAddEditPets(null);
-      } else if (e.target === logoff) {
-        setToken(null);
-
-        message.textContent = 'You have been logged off.';
-
-        petsTable.replaceChildren([petsTableHeader]);
-
-        showLoginRegister();
-      } else if (e.target.classList.contains('editButton')) {
-        message.textContent = '';
-        showAddEditPets(e.target.dataset.id);
-      } else if (e.target.classList.contains('deleteButton')) {
-        message.textContent = '';
-        deletePets(e.target.dataset.id);
-      }
+      showAddEditPets(null);
+    } else if (e.target.classList.contains('editButton')) {
+      message.textContent = '';
+      showAddEdit(e.target.dataset.id);
+    } else if (e.target.classList.contains('deleteButton')) {
+      message.textContent = '';
+      deleteJobs(e.target.dataset.id);
     }
   });
 };
@@ -87,5 +68,4 @@ export const showPets = async () => {
     message.textContent = 'A communication error occurred.';
   }
   enableInput(true);
-  setDivPet(petsDiv);
 };

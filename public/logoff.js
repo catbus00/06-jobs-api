@@ -1,22 +1,23 @@
 import { message, setToken } from './index.js';
 import { showLoginRegister } from './loginRegister.js';
 
-let jobsTable = null;
-let jobsTableHeader = null;
-let petsTable = null;
-let petsTableHeader = null;
+let logoffDiv = null;
 
 export const handleLogoff = () => {
-  logoffRegisterDiv = document.getElementById('logoff-register');
+  logoffDiv = document.getElementById('logoff-div');
   const logoff = document.getElementById('logoff');
 
-  logoffRegisterDiv.addEventListener('click', (e) => {
-    if (e.target === logoff) {
-      setToken(null);
-      message.textContent = 'You have been logged off.';
-      petsTable.replaceChildren([petsTableHeader]);
-      jobsTable.replaceChildren([jobsTableHeader]);
-    }
+  logoff.addEventListener('click', (e) => {
+    setToken(null);
+    message.textContent = 'You have been logged off.';
     showLoginRegister();
   });
+};
+
+export const showLogoff = () => {
+  logoffDiv.style.display = 'block';
+};
+
+export const hideLogoff = () => {
+  logoffDiv.style.display = 'none';
 };

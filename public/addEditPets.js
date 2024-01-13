@@ -1,11 +1,6 @@
-import {
-  enableInput,
-  inputEnabled,
-  message,
-  setDivPet,
-  token,
-} from './index.js';
-import { showPets } from './pets.js';
+import { enableInput, inputEnabled, message, setDiv, token } from './index.js';
+import { showListing } from './listing.js';
+import { hideLogoff } from './logoff.js';
 
 let addEditDivPets = null;
 let name = null;
@@ -64,7 +59,7 @@ export const handleAddEditPets = () => {
             gender.value = '';
             color.value = '';
             age.value = '';
-            showPets();
+            showListing();
           } else {
             message.textContent = data.msg;
           }
@@ -76,7 +71,7 @@ export const handleAddEditPets = () => {
         enableInput(true);
       } else if (e.target === editCancel) {
         message.textContent = '';
-        showPets();
+        showListing();
       }
     }
   });
@@ -106,7 +101,7 @@ export const deletePets = async (petId) => {
     console.error('Error:', err);
   } finally {
     enableInput(true);
-    showPets();
+    showListing();
   }
 };
 
@@ -119,7 +114,8 @@ export const showAddEditPets = async (petId) => {
     addingPet.textContent = 'add';
     message.textContent = '';
 
-    setDivPet(addEditDivPets);
+    setDiv(addEditDivPets);
+    hideLogoff();
   } else {
     enableInput(false);
 
@@ -146,12 +142,12 @@ export const showAddEditPets = async (petId) => {
       } else {
         // might happen if the list has been updated since last display
         message.textContent = 'The entry for your pet was not found';
-        showPets();
+        showListing();
       }
     } catch (err) {
       console.log(err);
       message.textContent = 'A communications error has occurred.';
-      showPets();
+      showListing();
     }
 
     enableInput(true);

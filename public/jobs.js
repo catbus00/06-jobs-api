@@ -1,12 +1,4 @@
-import {
-  inputEnabled,
-  setDiv,
-  message,
-  setToken,
-  token,
-  enableInput,
-} from './index.js';
-import { showLoginRegister } from './loginRegister.js';
+import { inputEnabled, setDiv, message, token, enableInput } from './index.js';
 import { showAddEdit, deleteJobs } from './addEdit.js';
 
 let jobsDiv = null;
@@ -15,7 +7,6 @@ let jobsTableHeader = null;
 
 export const handleJobs = () => {
   jobsDiv = document.getElementById('jobs');
-  const logoff = document.getElementById('logoff');
   const addJob = document.getElementById('add-job');
   jobsTable = document.getElementById('jobs-table');
   jobsTableHeader = document.getElementById('jobs-table-header');
@@ -24,14 +15,6 @@ export const handleJobs = () => {
     if (inputEnabled && e.target.nodeName === 'BUTTON') {
       if (e.target === addJob) {
         showAddEdit(null);
-      } else if (e.target === logoff) {
-        setToken(null);
-
-        message.textContent = 'You have been logged off.';
-
-        jobsTable.replaceChildren([jobsTableHeader]);
-
-        showLoginRegister();
       } else if (e.target.classList.contains('editButton')) {
         message.textContent = '';
         showAddEdit(e.target.dataset.id);
@@ -86,5 +69,4 @@ export const showJobs = async () => {
     message.textContent = 'A communication error occurred.';
   }
   enableInput(true);
-  setDiv(jobsDiv);
 };

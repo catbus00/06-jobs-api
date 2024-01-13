@@ -1,5 +1,6 @@
 import { inputEnabled, setDiv } from './index.js';
 import { showLogin } from './login.js';
+import { hideLogoff } from './logoff.js';
 import { showRegister } from './register.js';
 
 let loginRegisterDiv = null;
@@ -22,4 +23,5 @@ export const handleLoginRegister = () => {
 
 export const showLoginRegister = () => {
   setDiv(loginRegisterDiv);
+  hideLogoff();
 };

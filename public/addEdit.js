@@ -1,5 +1,6 @@
 import { enableInput, inputEnabled, message, setDiv, token } from './index.js';
-import { showJobs } from './jobs.js';
+import { showListing } from './listing.js';
+import { hideLogoff } from './logoff.js';
 
 let addEditDiv = null;
 let company = null;
@@ -54,7 +55,7 @@ export const handleAddEdit = () => {
             company.value = '';
             position.value = '';
             status.value = 'pending';
-            showJobs();
+            showListing();
           } else {
             message.textContent = data.msg;
           }
@@ -66,7 +67,7 @@ export const handleAddEdit = () => {
         enableInput(true);
       } else if (e.target === editCancel) {
         message.textContent = '';
-        showJobs();
+        showListing();
       }
     }
   });
@@ -94,7 +95,7 @@ export const deleteJobs = async (jobId) => {
     message.textContent = 'A communications error has occurred.';
   } finally {
     enableInput(true);
-    showJobs();
+    showListing();
   }
 };
 
@@ -107,6 +108,7 @@ export const showAddEdit = async (jobId) => {
     message.textContent = '';
 
     setDiv(addEditDiv);
+    hideLogoff();
   } else {
     enableInput(false);
 
@@ -129,15 +131,16 @@ export const showAddEdit = async (jobId) => {
         addEditDiv.dataset.id = jobId;
 
         setDiv(addEditDiv);
+        hideLogoff();
       } else {
         // might happen if the list has been updated since last display
         message.textContent = 'The jobs entry was not found';
-        showJobs();
+        showListing();
       }
     } catch (err) {
       console.log(err);
       message.textContent = 'A communications error has occurred.';
-      showJobs();
+      showListing();
     }
 
     enableInput(true);
