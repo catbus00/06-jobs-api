@@ -8,6 +8,16 @@ export const setDiv = (newDiv) => {
     activeDiv = newDiv;
   }
 };
+let activeDivPet = null;
+export const setDivPet = (newDiv) => {
+  if (newDiv != activeDivPet) {
+    if (activeDivPet) {
+      activeDivPet.style.display = 'none';
+    }
+    newDiv.style.display = 'block';
+    activeDivPet = newDiv;
+  }
+};
 
 export let inputEnabled = true;
 export const enableInput = (state) => {
@@ -31,6 +41,8 @@ import { showLoginRegister, handleLoginRegister } from './loginRegister.js';
 import { handleLogin } from './login.js';
 import { handleAddEdit } from './addEdit.js';
 import { handleRegister } from './register.js';
+import { showPets, handlePets } from './pets.js';
+import { handleAddEditPets } from './addEditPets.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   token = localStorage.getItem('token');
@@ -38,10 +50,13 @@ document.addEventListener('DOMContentLoaded', () => {
   handleLoginRegister();
   handleLogin();
   handleJobs();
+  handlePets();
   handleRegister();
   handleAddEdit();
+  handleAddEditPets();
   if (token) {
     showJobs();
+    showPets();
   } else {
     showLoginRegister();
   }
